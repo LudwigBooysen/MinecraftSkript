@@ -1,0 +1,48 @@
+
+# This skript made by ICY_Craft_YT
+# Version 1.0
+
+options:
+  Prefix : &0&l[&f&lServerName&b&lWarn&0&l]
+  Warns : 5 # Amount of Warns needed to get banned
+  BanTime : 1 day # How long someone gets banned
+  WarnPerm : icy.warn # Permission to warn someone
+  BanSystem : &f&lServerName&b&lWarnSystem # Warn system message when player gets banned
+
+command /warn <player> <text>:
+  usage: /warn <player> <reason>
+  permission: {@WarnPerm}
+  trigger:
+    if arg 1 is player:
+      message "{@Prefix} &cYou cant warn yourself!"
+    else:
+      add 1 to {%player's uuid%_warns}
+      if {_serverWarns::*} does not contain arg 1's uuid:
+        add arg 1's uuid to {_serverWarn::*}
+      #Broadcast msg
+      broadcast ""
+      broadcast "&f&l%player% &bwarned &f&l%arg 1% &bfor : &7%arg 2%"
+      broadcast ""
+      #Warned player msg
+      message "" to arg 1
+      message "{@Prefix} &fYou have been warned ! &7(%{%player's uuid%_warns}%&7)" to arg 1
+      message "" to arg 1
+
+command /unwarn <player>:
+  usage: /unwarn <player>
+  permission: {@WarnPerm}
+  trigger:
+    if {_serverWarns::*} contains arg 1's uuid:
+      remove arg 1's uuid from {_serverWarns::*}
+      message "" to arg 1
+      message "{@Prefix} &fYou have been unwarned from %player%." to arg 1
+      message "" to arg 1
+      message "{@Prefix} &f%arg 1% has been unwarned." to player
+    else:
+      message "{@Prefix} &f%arg 1% &chas no warns against them!" to player
+      
+every second:
+  loop all players:
+    if {%loop-player's uuid%_warns} is more than {@Warns}-1:
+      ban loop-player due to "&cYou have been banned because of {@BanSystem}" for {@BanTime}
+      set {%loop-player's uuid%_warns} to 0
