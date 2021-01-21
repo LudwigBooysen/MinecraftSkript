@@ -1,0 +1,28 @@
+
+# StaffChat made by ICY_Craft_YT
+# Github: https://github.com/LudwigBooysen
+# Discord: ICY_Craft_YT#9243
+# Version: 0.1
+
+options:
+  CmdBlockMsg : &4&lNOPE | ERROR
+
+on command "/pl":
+  if player is not op:
+    cancel event
+    message "{@CmdBlockMsg}"
+
+on command "/plugins"
+  if player is not op:
+    cancel event
+    message "{@CmdBlockMsg}"
+
+on command "/version":
+  if player is not op:
+    cancel event
+    message "{@CmdBlockMsg}"
+
+on command "/info":
+  if player is not op:
+    cancel event
+    message "{@CmdBlockMsg}"
