@@ -1,6 +1,8 @@
 
 # This skript made by ICY_Craft_YT
-# Version 1.0
+# Github: https://github.com/LudwigBooysen
+# Discord: ICY_Craft_YT#9243
+# Version: 1.0
 
 options:
   Prefix : &0&l[&f&lServerName&b&lWarn&0&l]
@@ -19,11 +21,11 @@ command /warn <player> <text>:
       add 1 to {%player's uuid%_warns}
       if {_serverWarns::*} does not contain arg 1's uuid:
         add arg 1's uuid to {_serverWarn::*}
-      #Broadcast msg
+      # Broadcast msg
       broadcast ""
       broadcast "&f&l%player% &bwarned &f&l%arg 1% &bfor : &7%arg 2%"
       broadcast ""
-      #Warned player msg
+      # Warned player msg
       message "" to arg 1
       message "{@Prefix} &fYou have been warned ! &7(%{%player's uuid%_warns}%&7)" to arg 1
       message "" to arg 1
