@@ -1,1 +1,1 @@
-# MinecraftSkrtipt
+# MinecraftSkript

@@ -1,0 +1,33 @@
+
+# StaffChat made by ICY_Craft_YT
+# Github: https://github.com/LudwigBooysen
+# Discord: ICY_Craft_YT#9243
+# Version: 1.0
+
+# Styles #
+# 1 - Blue and Black
+# 2 - Red and Black
+# 3 - Green and Black
+# 4 - Yellow and Black
+# 5 - Orange and Black
+
+options:
+  ScPerm : icy.staffchat
+  Style : 1
+
+command /staffchat [<text>]:
+  aliases: /sc
+  permission: {@ScPerm}
+  trigger:
+    loop all players:
+      if loop-player has permission "{@ScPerm}":
+        if {@Style} is 1:
+          send "&bStaffChat &8>> &b%player's displayname% &8: &r%arg 1%" to loop-player
+        else if {@Style} is 2:
+          send "&cStaffChat &8>> &c%player's displayname% &8: &r%arg 1%" to loop-player
+        else if {@Style} is 3:
+          send "&aStaffChat &8>> &a%player's displayname% &8: &r%arg 1%" to loop-player
+        else if {@Style} is 4:
+          send "&eStaffChat &8>> &e%player's displayname% &8: &r%arg 1%" to loop-player
+        else if {@Style} is 5:
+          send "&6StaffChat &8>> &6%player's displayname% &8: &r%arg 1%" to loop-player
