@@ -10,10 +10,13 @@
 # 3 - Green and Black
 # 4 - Yellow and Black
 # 5 - Orange and Black
+# 6 - Purple and black
+# 7 - Pink and Black
+# 8 - Aqua and Black
 
 options:
-  ScPerm : icy.staffchat
-  Style : 1
+  ScPerm : icy.staffchat # Give this perm for all staff members
+  Style : 1 # change the style here
 
 command /staffchat [<text>]:
   aliases: /sc
@@ -31,3 +34,9 @@ command /staffchat [<text>]:
           send "&eStaffChat &8>> &e%player's displayname% &8: &r%arg 1%" to loop-player
         else if {@Style} is 5:
           send "&6StaffChat &8>> &6%player's displayname% &8: &r%arg 1%" to loop-player
+        else if {@Style} is 6:
+          send "&5StaffChat &8>> &5%player's displayname% &8: &r%arg 1%" to loop-player
+        else if {@Style} is 7:
+          send "&dStaffChat &8>> &d%player's displayname% &8: &r%arg 1%" to loop-player
+        else if {@Style} is 8:
+          send "&bStaffChat &8>> &b%player's displayname% &8: &r%arg 1%" to loop-player
