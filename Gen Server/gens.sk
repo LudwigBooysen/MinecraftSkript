@@ -3,6 +3,7 @@
 # Github: https://github.com/LudwigBooysen
 # Discord: ICY_Craft_YT#9243
 # Version: 0.1
+# Requires: TuSKe (plugin-skriptAddon)
 
 options:
   Prefix : &0&l[&b&lICY&f&lGens&0&l]
