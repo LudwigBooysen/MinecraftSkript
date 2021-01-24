@@ -1,0 +1,66 @@
+
+# IcyGens made by ICY_Craft_YT
+# Github: https://github.com/LudwigBooysen
+# Discord: ICY_Craft_YT#9243
+# Version: 0.1
+
+options:
+  Prefix : &0&l[&b&lICY&f&lGens&0&l]
+  DropTime : 4.5 seconds
+  # Genlist
+  GenListGuiFillItem : black stained glass pane
+  # Coal Gen
+  CoalGenBlock : coal block
+  CoalGenName : &8Coal &fGen
+
+# Commands
+
+command /gen <text> [<player>]:
+  description: gives a gen for the player (admin)
+  permission: icy.gens.gen
+  permission message: &4&lNOPE | ERROR
+  usage: /gen <generator> [<player>]
+  trigger:
+    if arg 2 is not set:
+      if arg 1 is "coal":
+        give player 1 {@CoalGenBlock} named "{@CoalGenName}"
+    else if arg 2 is set:
+      if arg 1 is "coal":
+        give arg 2 1 {@CoalGenBlock} named "{@CoalGenName}"
+
+command /genlist:
+  trigger:
+    open virtual chest with 3 rows named "Genlist" to player
+    format gui slot 0 of player with {@GenListGuiFillItem} named " " to close
+    loop (3*9) times:
+      format gui slot loop-value of player with {@GenListGuiFillItem} named " " to close
+    format gui slot 10 of player with {@CoalGenBlock} named "{@CoalGenName}" to close 
+
+# Drop Items
+
+every {@DropTime} seconds:
+  loop all players:
+    # Coal
+    loop {%loop-player's uuid%_CoalGens::*}:
+      drop 1 coal above loop-value-2 without velocity
+
+# Gen
+
+# Upgrade
+on right click:
+  if player is sneaking:
+    if {%player's uuid%_CoalGens::*} contains clicked block's position:
+      message "{@Prefix} &cThat is the max level gen!"
+
+# Pickup
+on left click:
+  if {%player's uuid%_CoalGens::*} contains clicked blocks' position:
+    remove clicked block's position from {%player's uuid%_CoalGens::*}
+    give player 1 {@CoalGenBlock} named {@CoalGenName}
+    set clicked block to air
+
+# place
+on block place:
+  if player's tool's name is "{@CoalGenName}":
+    add event-block's position to {%player's uuid%_CoalGens::*}
+    remove 1 {@CoalGenBlock} from the player
