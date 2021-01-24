@@ -1,0 +1,40 @@
+
+# IcyShop made by ICY_Craft_YT
+# Github: https://github.com/LudwigBooysen
+# Discord: ICY_Craft_YT#9243
+# Version: 0.1
+
+options:
+  # Vars
+  ShowBal : 1 # Set to 0 to disable
+  # Shop
+  ShopRows : 3
+  ShopName : &eSHOP
+  ShopFillItem : black stained glass pane
+  # Block Shop
+  BlockShopRows : 5
+  BlockShopName : &eBlocks
+  BlockShopItem : grass block
+
+command /shop:
+  usage: /shop
+  description: Opens the shop for you
+  trigger:
+    # Set vars
+    set {_ShowBal} to {@ShowBal}
+    # Open Shop
+    open virtual chest with {@ShopRows} rows named "{@ShopName}" to player
+    format gui slot 0 of player with {@ShopFillItem} named " " to close
+    loop {@ShopRows}*9 times:
+      format gui slot loop-value of player with {@ShopFillItem} to close
+    # Blocks Shop
+    format gui slot 10 of player with {@BlockShopItem} named "{@BlockShopName}" to run:
+      close player's inventory
+      open virtual chest with {@BlockShopRows} rows named "{@BlockShopName}" to player
+      format gui slot 0 of player with {@ShopFillItem} named " " to close
+      loop {@BlockShopRows}*9 times:
+        format gui slot loop-value of player with {@ShopFillItem} named " " to close
+      format gui slot 23 of player with grass block with lore "&aCost: &c$100" to close
+    # Show Balance
+    if {_ShowBal} is 1:
+      format gui slot 18 of player with gold ingot named "&6Balance" with lore "&a$%player's balance%" to close
